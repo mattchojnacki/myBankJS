@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="app" class="ng-scope">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Bank</title>
+    <link rel="stylesheet" href="/css/nv.d3.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body class="ng-scope top-buffer" ng-controller="Menu as ctrl">
+
+    <div class="container">
+
+		<!-- warning animation -->
+		<div style="position: fixed; top: 0; left: 50%; transform: translateX(-50%); text-align: center; width: 500px; max-width=80%; z-index: 10000">
+			<uib-alert class="animated" type="{{ctrl.alert.type}}" close="ctrl.closeAlert()" dismiss-on-timeout="2000" ng-if="ctrl.alert.message" ng-bind="ctrl.alert.message"></uib-alert>
+		</div>
+
+		<!-- login dialog -->
+		<div id="loginDialog" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Log in <small><span ng-show="ctrl.loginMsg" ng-bind="ctrl.loginMsg" class="left text-left alert alert-danger" role="alert"/></small></h4>
+					</div>
+					<form name="loginForm" class="ng-pristine ng-untouched ng-valid" ng-submit="ctrl.validateCredentials()">
+						<div class="modal-body">
+							<div class="panel panel-default">
+								<div class="form-group panel-body">
+									<label for="login">Login</label>
+									<input id="login" type="text" ng-model="ctrl.login" class="form-control" required="" placeholder="username" ng-change="ctrl.loginMsg=''" autofocus=""/>
+									<label for="password">Password</label>
+									<input id="password" type="password" ng-model="ctrl.password" class="form-control" placeholder="password" ng-change="ctrl.loginMsg=''"/>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary glyphicon glyphicon-log-in" ng-disabled="loginForm.$invalid"/>
+							<button type="button" class="btn btn-default glyphicon glyphicon-remove" data-dismiss="modal"/>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- menu -->
+		<div class="navbar navbar-default navbar-fixed-top" >
+	        <div class="container-fluid">
+				<div class="collapse navbar-collapse" id="mynavbar-content">
+
+					<!-- menu navigation bar -->
+				    <ul class="nav navbar-nav">
+						<li ng-class="ctrl.navClass('/')"><a href="#/"><span class="glyphicon glyphicon-home"></span></a></li>
+						<li ng-repeat="menuPos in ctrl.menu" ng-class="ctrl.navClass(menuPos.route)"><a href="#{{menuPos.route}}" ng-bind="menuPos.title"></a></li>
+				  	</ul>
+
+					<!-- login/logout area -->
+					<ul class="nav navbar-nav navbar-right">
+						<li ng-show="ctrl.loggedUser">
+							<a href="#" ng-click="ctrl.logOut()">
+								<span ng-bind="ctrl.loggedUser" class="badge"></span>
+								<span class="glyphicon glyphicon-log-out"></span>
+							</a>
+						</li>
+						<li ng-hide="ctrl.loggedUser">
+							<a href="#" ng-click="ctrl.logIn()">
+								<span>not logged in</span>
+								<span class="glyphicon glyphicon-log-in"></span>
+							</a>
+						</li>
+					</ul>
+
+				</div>
+	        </div>
+	    </div>
+
+		<!-- main area -->
+		<div ng-view></div>
+
+	</div>
+
+<script src="/js/angular.min.js"></script>
+<script src="/js/angular-route.min.js"></script>
+<script src="/js/angular-cookies.min.js"></script>
+<script src="/js/angular-websocket.min.js"></script>
+<script src="/js/angular-animate.min.js"></script>
+<script src="/js/d3.min.js"></script>
+<script src="/js/nv.d3.min.js"></script>
+<script src="/js/angular-nvd3.min.js"></script>
+<script src="/js/ui-bootstrap-tpls.min.js"></script>
+
+<script src="/js/app.js"></script>
+<script src="/js/menu.js"></script>
+<script src="/js/home.js"></script>
+<script src="/js/page1.js"></script>
+<script src="/js/page2.js"></script>
+<script src="/js/page3.js"></script>
+
+</body></html>

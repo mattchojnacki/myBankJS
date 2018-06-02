@@ -1,0 +1,30 @@
+.top-buffer { margin-top: 5%; }
+.cselected { background-color: #FF8; }
+
+.animated.ng-enter,
+.animated.ng-leave {
+    -webkit-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+}
+
+.animated.ng-enter,
+.animated.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+
+.animated.ng-leave,
+.animated.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+
+.animated.ng-hide-add, .animated.ng-hide-remove {
+    display: block!important;
+}
+
+.modal-header, h4, .close {
+    background-color: red;
+    color: white;
+}
+.modal-footer {
+    background-color: #f9f9f9;
+}

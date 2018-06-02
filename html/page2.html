@@ -1,0 +1,35 @@
+<div class="row col-xs-12">
+
+	<h1>History</h1>
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading">
+			The last transactions
+		</div>
+
+		<div class="panel-body">
+
+			<table class="table table-stripped table-hover">
+				<tr>
+					<th>Date</th><th>Title</th><th>Account</th><th align="right">Amount</th><th align="right">Balance after</th>
+				</tr>
+				<tr ng-repeat="operation in ctrl.history" ng-class="operation.amount > 0 ? 'success' : 'danger' ">
+					<td ng-bind="ctrl.common.dateFormat(operation.date)"></td>
+					<td ng-bind="operation.title"></td>
+					<td ng-bind="operation.account2"></td>
+					<td ng-bind="operation.amount" align="right"></td>
+					<td ng-bind="operation.after" align="right"></td>
+				</tr>
+			</table>
+
+			<button class="btn btn-primary glyphicon glyphicon-option-horizontal" ng-click="ctrl.incLimit()" ng-disabled="ctrl.nSkip + ctrl.nLimit >= ctrl.nAll"></button>
+
+		</div>
+
+		<div class="panel-footer text-center">
+			Total number of transactions: <span ng-bind="ctrl.nAll"></span>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,61 @@
+<div class="row col-xs-12">
+
+	<h1>Transfer</h1>
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading">
+			Transfer parameters
+		</div>
+
+		<div class="panel-body">
+
+			<table class="table table-stripped">
+				<tr ng-class="ctrl.balance > 0 ? 'info' : 'warning'">
+					<td align="left">Balance</td><td ng-bind="ctrl.balance" align="right"></td>
+				</tr>
+				<tr>
+					<td>Maximum payoff</td><td ng-bind="ctrl.balance - ctrl.limit" align="right"></td>
+				</tr>
+			</table>
+
+		</div>
+
+		<div class="panel-footer text-center">
+
+			<form align="center" ng-submit="ctrl.transfer()">
+
+				<div class="row">
+					<div class="col-xs-6">
+						<label for="title">Title</label>
+						<input id="title" class="form-control" type="text" ng-model="ctrl.title" required="" autofocus=""/>
+					</div>
+					<div class="col-xs-6">
+						<label for="amount">Amount</label>
+						<input id="amount" class="form-control" type="number" ng-model="ctrl.amount" placeholder="amount" required=""/>
+					</div>
+					<div class="col-xs-6">
+						<label for="recipient">Recipient</label>
+						<input id="recipient" class="form-control" type="text" ng-model="ctrl.recipient" required="" autofocus="" ng-change="ctrl.resetPrevrec()"/>
+					</div>
+					<div class="col-xs-6">
+						<label for="prevrec">Previous Recipients</label>
+						<select class="form-control" name="prevrec" id="prevrec" ng-model="ctrl.prevrec" ng-change="ctrl.setRecipient()">
+							<option ng-repeat="option in ctrl.prevrecs" value="{{option._id}}">{{option._id}} ({{option.count}})</option>
+						</select>
+					</div>
+					<div class="col-xs-12" style="margin: 20px 0">
+						<button type="submit" class="btn btn-primary" ng-disabled="!ctrl.recipient || ctrl.amount <= 0 || ctrl.amount > ctrl.balance - ctrl.limit">Transfer</button>
+					</div>
+
+				</div>
+
+			</form>
+
+		</div>
+
+
+	</div>
+</div>
+			
+
